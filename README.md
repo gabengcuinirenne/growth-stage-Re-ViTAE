@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 ### Install
 
 * Create a conda virtual environment and activate it:
+=======
+<h1 align="left">Re-ViTAE: Vision Transformer Advanced by Exploring Intrinsic Inductive Bias</h1> 
+>>>>>>> 7782d1c31d6ab83cbee1d5872d395896a16bd2ce
 
 ```bash
 conda create -n vitae python=3.7 -y
@@ -59,6 +63,11 @@ pip install pyyaml ipdb
  
   ```
 ### Evaluation
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 7782d1c31d6ab83cbee1d5872d395896a16bd2ce
 ```bash
 python validate.py \[ImageNetPath] --model ViTAE\_basic\_Tiny --eval\_checkpoint \[Checkpoint Path]
 ```
@@ -66,3 +75,7 @@ python validate.py \[ImageNetPath] --model ViTAE\_basic\_Tiny --eval\_checkpoint
 ```bash
 python -m torch.distributed.launch --nproc\_per\_node=4 main.py \[ImageNetPath] --model ViTAE\_basic\_Tiny -b 128 --lr 1e-3 --weight-decay .03 --img-size 224 --amp
 ```
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7782d1c31d6ab83cbee1d5872d395896a16bd2ce
