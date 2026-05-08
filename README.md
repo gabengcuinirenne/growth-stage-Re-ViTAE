@@ -1,10 +1,10 @@
-<<<<<<< HEAD
+
 ### Install
 
 * Create a conda virtual environment and activate it:
-=======
-<h1 align="left">Re-ViTAE: Vision Transformer Advanced by Exploring Intrinsic Inductive Bias</h1> 
->>>>>>> 7782d1c31d6ab83cbee1d5872d395896a16bd2ce
+
+<h1 align="left">Re-ViTAE: Re-Attention Vision Transformer Advanced by Exploring Intrinsic Inductive Bias</h1> 
+
 
 ```bash
 conda create -n vitae python=3.7 -y
@@ -19,21 +19,6 @@ conda install pytorch==1.8.1 torchvision==0.9.1 cudatoolkit=10.2 -c pytorch -c c
 
 ```bash
 pip install timm==0.4.12
-```
-
-* Install `Apex`:
-
-```bash
-git clone https://github.com/NVIDIA/apex
-cd apex
-git reset --hard a651e2c24ecf97cbf367fd3f330df36760e1c597
-pip install -v --disable-pip-version-check --no-cache-dir --global-option="--cpp\_ext" --global-option="--cuda\_ext" ./
-```
-
-* Install other requirements:
-
-```bash
-pip install pyyaml ipdb
 ```
 
 ### Data Prepare
@@ -63,11 +48,7 @@ pip install pyyaml ipdb
  
   ```
 ### Evaluation
-<<<<<<< HEAD
-=======
 
-
->>>>>>> 7782d1c31d6ab83cbee1d5872d395896a16bd2ce
 ```bash
 python validate.py \[ImageNetPath] --model ViTAE\_basic\_Tiny --eval\_checkpoint \[Checkpoint Path]
 ```
@@ -75,7 +56,4 @@ python validate.py \[ImageNetPath] --model ViTAE\_basic\_Tiny --eval\_checkpoint
 ```bash
 python -m torch.distributed.launch --nproc\_per\_node=4 main.py \[ImageNetPath] --model ViTAE\_basic\_Tiny -b 128 --lr 1e-3 --weight-decay .03 --img-size 224 --amp
 ```
-<<<<<<< HEAD
-=======
 
->>>>>>> 7782d1c31d6ab83cbee1d5872d395896a16bd2ce
