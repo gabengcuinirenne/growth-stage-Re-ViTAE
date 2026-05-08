@@ -1,4 +1,4 @@
-<h1 align="left">ViTAE: Vision Transformer Advanced by Exploring Intrinsic Inductive Bias</h1> 
+<h1 align="left">Re-ViTAE: Vision Transformer Advanced by Exploring Intrinsic Inductive Bias</h1> 
 
 ```bash
 conda create -n vitae python=3.7 -y
@@ -58,7 +58,6 @@ We use standard ImageNet dataset, you can download it from http://image-net.org/
 
 ### Evaluation
 
-Take ViTAE_basic_Tiny as an example, to evaluate the pretrained ViTAE model on ImageNet val, run 
 
 ```bash
 python validate.py [ImageNetPath] --model ViTAE_basic_Tiny --eval_checkpoint [Checkpoint Path]
@@ -72,86 +71,3 @@ Take ViTAE_basic_Tiny as an example, to train the ViTAE model on ImageNet with 4
 python -m torch.distributed.launch --nproc_per_node=4 main.py [ImageNetPath] --model ViTAE_basic_Tiny -b 128 --lr 1e-3 --weight-decay .03 --img-size 224 --amp
 ```
 
-Our code support multi-node distributed training, and the training scrips of ViTAEv2 variants are given below. 
-
-> [ViTAEv2_S](vitaev2/training_scripts/ViTAEv2_S.sh), [ViTAEv2_48M](vitaev2/training_scripts/ViTAEv2_48M.sh), [ViTAEv2_B](vitaev2/training_scripts/ViTAEv2_B.sh)
-
-
-The trained model file will be saved under the ```output``` folder
-
-## Results
-
-## Main Results on ImageNet-1K with pretrained models
-| name | resolution | acc@1 | acc@5 | acc@RealTop-1 | Pretrained |
-| :---: | :---: | :---: | :---: | :---: | :---: |
-| ViTAE-T | 224x224 | 75.3 | 92.7 | 82.9 | [Weights&Log](https://drive.google.com/drive/folders/1SSiS5trE9XoDBnOdUwfld4Khz9rHriNL?usp=sharing) |
-| ViTAE-6M | 224x224 | 77.9 | 94.1 | 84.9 | [Weights&Log](https://drive.google.com/drive/folders/1f1yxh9GIhqHLzYw9Bv1lJbeR4lvVn4CC?usp=sharing) |
-| ViTAE-S | 224x224 | 82.0 | 95.9 | 87.0 | [Weights&Log](https://drive.google.com/drive/folders/1lFL_FCd3xeSNdDavmRqRY1IyboLBG1wH?usp=sharing) |
-| ViTAE-B | 224x224 | 83.8 | \ | 89.4 | [Weights](https://drive.google.com/drive/folders/1KTu8dHoPVscVDPS_9qiA8UfCMb56dcsV?usp=sharing) |
-| ViTAE-L | 224x224 | 86.0 | \ | 90.3 | [Weights](https://1drv.ms/u/s!AimBgYV7JjTlgcgDMK8xKeeSaMKNrw?e=G1RLbI) |
-| ViTAE-H | 224x224 | 86.9 | \ | 90.6 | [Weights](https://1drv.ms/u/s!AimBgYV7JjTlgcgGj20zQsU3eQbQtw?e=5SMExk) |
-| ViTAEv2-S | 224x224 | 82.6 | 96.2 | 87.6 | [Weights](https://1drv.ms/u/s!AimBgYV7JjTlgRgpIv58qMLokxP6?e=9kQgCo)&[Log](vitaev2/output/ViTAEv2_S.txt) |
-| ViTAEv2-48M | 224x224 | 83.8 | 96.6 | 88.4 | [Weights](https://1drv.ms/u/s!AimBgYV7JjTlgRnQjbNipq0_OLKM?e=75TzxI)&[Log](vitaev2/output/ViTAEv2_48M.txt) |
-| ViTAEv2-B | 224x224 | 84.6 | 96.9 | 88.7 | [Weights](https://1drv.ms/u/s!AimBgYV7JjTlgRo8kRsNmnYikXw4?e=Fd3cki)&[Log](vitaev2/output/ViTAEv2_B.txt) |
-
-## Models with ImageNet-22K pretraining
-| name | resolution | acc@1 | acc@5 | acc@RealTop-1 | Pretrained |
-| :---: | :---: | :---: | :---: | :---: | :---: |
-| ViTAE-B | 224x224 | 84.8 | \ | 89.9 | [Weights](https://drive.google.com/drive/folders/1KSXdMIQA1fVusfYf3XI_BPAberbmYiNv?usp=sharing) |
-| ViTAE-L | 224x224 | 87.5 | \ | 90.8 | [Weights](https://1drv.ms/u/s!AimBgYV7JjTlgcgExiB2s8TrE7uqtQ?e=OrfOop) |
-| ViTAE-H | 224x224 | 88.0 | \ | 90.7 | [Weights](https://1drv.ms/u/s!AimBgYV7JjTlgcgFumfz5dcsFPLenA?e=QOMLmL) |
-| ViTAEv2-B | 224x224 | 86.1 | 97.9 | 89.9 | [Weights](https://1drv.ms/u/s!AimBgYV7JjTlgRuwkrO4cjvD5ydH?e=WfK7Az) |
-
-## The performance with few-shot learning
-
-<figure>
-<img src="figs/Few-shot.png">
-<figcaption align = "center"><b>Fig.3 - Use 1%, 10%, and 100% data for finetuning the ViTAE variants.</b></figcaption>
-</figure>
-
-## Inference speed comparison with ViTAEv2 under different resolutions
-| | R@224 | R@448 | R@896 | acc@1 |
-|:---:|:---:|:---:|:---:|:---:|
-| ViT-S | 1459 | 318 | 48 | 79.9 |
-| ViT-B | 803 | 167 | 25 | 81.8 |
-| T2T-ViT-14 | 996 | 220 | 33 | 81.2 |
-| T2T-ViT-24 | 575 | 118 | 17 | 82.3 |
-| Swin-T | 815 | 246 | 60 | 81.3 |
-| ViTAEv2-S | 722 | 205 | 46 | 82.6 |
-
-For Resolution 224, 448, and 896, we use batch size 128, 64, and 16 during the measurement.
-
-
-## Statement
-This project is for research purpose only. For any other questions please contact [yufei.xu at outlook.com](mailto:yufei.xu@outlook.com) [qmzhangzz at hotmail.com](mailto:qmzhangzz@hotmail.com) .
-
-## Citing ViTAE and ViTAEv2
-```
-@article{xu2021vitae,
-  title={Vitae: Vision transformer advanced by exploring intrinsic inductive bias},
-  author={Xu, Yufei and Zhang, Qiming and Zhang, Jing and Tao, Dacheng},
-  journal={Advances in Neural Information Processing Systems},
-  volume={34},
-  year={2021}
-}
-@article{zhang2022vitaev2,
-  title={ViTAEv2: Vision Transformer Advanced by Exploring Inductive Bias for Image Recognition and Beyond},
-  author={Zhang, Qiming and Xu, Yufei and Zhang, Jing and Tao, Dacheng},
-  journal={arXiv preprint arXiv:2202.10108},
-  year={2022}
-}
-```
-
-## Other Links
-
-> **Image Classification**: See [ViTAE for Image Classification](https://github.com/ViTAE-Transformer/ViTAE-Transformer/tree/main/Animal-Pose-Estimation)
-
-> **Object Detection**: See [ViTAE for Object Detection](https://github.com/ViTAE-Transformer/ViTAE-Transformer/tree/main/Object-Detection).
-
-> **Semantic Segmentation**: See [ViTAE for Semantic Segmentation](https://github.com/ViTAE-Transformer/ViTAE-Transformer/tree/main/Semantic-Segmentation).
-
-> **Animal Pose Estimation**: See [ViTAE for Animal Pose Estimation](https://github.com/ViTAE-Transformer/ViTAE-Transformer/tree/main/Animal-Pose-Estimation).
-
-> **Matting**: See [ViTAE for Matting](https://github.com/ViTAE-Transformer/ViTAE-Transformer-Matting).
-
-> **Remote Sensing**: See [ViTAE for Remote Sensing](https://github.com/ViTAE-Transformer/ViTAE-Transformer-Remote-Sensing).
